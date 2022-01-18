@@ -140,6 +140,6 @@ Here you can set up your api key.
 
 <img src="img/Screenshot_1.png">
 
-<img src="img/Screenshot_2.gif">
+<img src="img/Screenshot_2.png">
 
-<img src="img/Screenshot_3.png">
+<img src="img/video.gif">
