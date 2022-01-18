@@ -1,6 +1,6 @@
 # Here Api Map Field
 
-Here API map for Larvel Nova Field with the ability of real-time position update.
+Here API map for Laravel Nova Field with the ability of real-time position update.
 
 ### Installation
 
