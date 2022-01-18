@@ -12,7 +12,7 @@ php artisan vendor:publish --provider="Haythem\HereApiMapField\FieldServiceProvi
 
 Here you can set up your api key.
 
-## How to use it
+## Usage
 
 ```php
         // NOVA RESOURCE
@@ -126,6 +126,6 @@ Here you can set up your api key.
 
 ## Screenshot
 
-![](/img/Screenshot_1.PNG)
+![](img/Screenshot_1.PNG)
 
-![](/img/Screenshot_2.GIF)
+![](img/Screenshot_2.GIF)
