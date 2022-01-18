@@ -126,6 +126,6 @@ Here you can set up your api key.
 
 ## Screenshot
 
-![](img/Screenshot_1.PNG)
+<img src="img/Screenshot_1.png">
 
-![](img/Screenshot_2.GIF)
+<img src="img/Screenshot_2.gif">
