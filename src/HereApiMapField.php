@@ -6,6 +6,11 @@ use Laravel\Nova\Fields\Field;
 
 class HereApiMapField extends Field
 {
+
+    private $internalGpsPoints = [];
+    private $internalGpsCircles = [];
+
+
     public function __construct($name, $attribute = null, callable $resolveCallback = null)
     {
         parent::__construct($name, $attribute, $resolveCallback);
@@ -15,10 +20,15 @@ class HereApiMapField extends Field
             config('here-api-map-field.global_api_key')
             :
             null);
+        $this->setDefaultMarkerSvg(!empty(config('here-api-map-field.default_marker_svg')) ?
+            config('here-api-map-field.default_marker_svg')
+            :
+            null);
         $this->fillUsing(function () {
             return null;
         });
     }
+
 
 
 
@@ -47,9 +57,22 @@ class HereApiMapField extends Field
      * @param mixed $api_key 
      * @return $this 
      */
+    public function apiKey($apikey)
+    {
+        return $this->withMeta(['apiKey' => $apikey]);
+    }
+
+
+
     private function setGlobalApiKey($api_key)
     {
         return $this->withMeta(['globalApiKey' => $api_key]);
+    }
+
+
+    private function setDefaultMarkerSvg($svg)
+    {
+        return $this->withMeta(['defaultMarkerSvg' => $svg]);
     }
 
 
@@ -61,10 +84,6 @@ class HereApiMapField extends Field
      */
     public $component = 'route-map-field';
 
-    public function apiKey($apikey)
-    {
-        return $this->withMeta(['apiKey' => $apikey]);
-    }
 
 
 
@@ -79,12 +98,94 @@ class HereApiMapField extends Field
      * @param int $time Frequence of updating the markers position in ms.
      * @return $this 
      */
-    public function gpsPoints($gps_points, $update_url = null, $time = 10000)
+    public function addGpsPoints($gps_points)
+    {
+        $this->internalGpsPoints = array_merge($gps_points, $this->internalGpsPoints);
+        return $this->withMeta(["gpsPoints" => $this->internalGpsPoints]);
+    }
+
+
+
+    /**
+     * Add gps point.
+     * 
+     * @param mixed $lat 
+     * @param mixed $lng 
+     * @param string $description 
+     * @param mixed $svg 
+     * @param bool $show_marker 
+     * @return $this 
+     */
+    public function addGpsPoint($id, $lat, $lng, $description = "", $svg = null, $show_marker = true)
+    {
+        $this->internalGpsPoints[] = [
+            "id" => $id,
+            "lat" => $lat,
+            "lng" => $lng,
+            "description" => $description,
+            "svg" => $svg,
+            "show_marker" => $show_marker
+        ];
+        return $this->addGpsPoints([]);
+    }
+
+
+
+    /**
+     * Add a cirles.
+     * 
+     * @param array $circles
+     * @return $this 
+     */
+    public function addCircles($circles)
+    {
+        $this->internalGpsCircles = array_merge($circles, $this->internalGpsCircles);
+        return $this->withMeta(["circles" => $this->internalGpsCircles]);
+    }
+
+
+
+
+    /**
+     * Add a cirle.
+     * 
+     * @param mixed $lat 
+     * @param mixed $lng 
+     * @param int $radius 
+     * @param string $color 
+     * @param string $border_color 
+     * @param int $border_width 
+     * @return $this 
+     */
+    public function addCircle($lat, $lng, $radius = 1000, $color = "rgba(255, 87, 34, 0.5)", $border_color = "rgba(0,0,0,1)", $border_width = 1)
+    {
+
+        $this->internalGpsCircles[] = [
+            "lat" => $lat,
+            "lng" => $lng,
+            "radius" => $radius,
+            "color" => $color, //oprional
+            "border_color" => $border_color, //oprional
+            "border_width" => $border_width //oprional
+        ];
+        return $this->addCircles([]);
+    }
+
+
+
+
+    /**
+     * Refresh the gps points via a url.
+     * 
+     * @param mixed $from_url 
+     * @param mixed $interval
+     * @return $this 
+     */
+    public function autoRefreshPoints($from_url, $interval = 5000)
     {
         return $this->withMeta([
-            'gpsPoints' => $gps_points,
-            'updateUrl' => $update_url,
-            'time' => $time
+            'updateUrl' => $from_url,
+            'time' => $interval
         ]);
     }
 
@@ -112,21 +213,6 @@ class HereApiMapField extends Field
     public function showTime($show_time = true)
     {
         return $this->withMeta(['showTime' => $show_time]);
-    }
-
-
-
-    /**
-     * Add a cirles.
-     * 
-     * @param array $circles
-     * @return $this 
-     */
-    public function addCircles($circles = [])
-    {
-        return $this->withMeta([
-            'circles' => $circles,
-        ]);
     }
 
 
