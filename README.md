@@ -58,7 +58,7 @@ php artisan vendor:publish --provider="Haythem\HereApiMapField\FieldServiceProvi
                         HereApiMapField::make('Route')
                         ->apikey('<API_KEY>') // Optional If you specify the api key in theconfig file "here-api-map-field.php" you don't need to add it here because it will override it.https://developer.here.com/tutorials/getting-here-credentials/
 
-                        ->addGpsPoints($points).// you can add markers in two ways you can pass an array of marker or/and chain it with addGpsPoint like the commented code below.
+                        ->addGpsPoints($points).// you can add markers in two ways you can pass an array of markers or/and chain it with addGpsPoint like the commented code below.
 
                         //->addGpsPoint(4, 52.4698452, 13.4827823)
                         //->addGpsPoint(5, 52.4818032, 13.5827823,'<svg></svg>',true)
@@ -67,13 +67,13 @@ php artisan vendor:publish --provider="Haythem\HereApiMapField\FieldServiceProvi
                         ->autoRefreshPoints(route('update-positions'),5000)// Optional you can update markers location with refreshing the map.
 
                         ->addCircles($circles)
-                        // Optional you can add circles in two ways you can pass an array of circle or/and chain it with addCircle like the commented code below.
+                        // Optional you can add circles in two ways you can pass an array of circles or/and chain it with addCircle like the commented code below.
 
                         //->addCircle(52.5190146, 13.4979387, 10000)
                         //->addCircle(52.5190146, 13.2979387, 5000,"rgba(255, 87, 34, 0.5)","rgba(0,0,0,1)",1)
 
                         ->setCenterAndZoom(52.4698452, 13.3827823, 12)
-                        // Optional setinitial postion and zoom bydefault it will center at the first point with 14 zoom.
+                        // Optional set initial postion and zoom by default it will center at the first point with 14 zoom.
 
                         ->showInstructions()
                         // Optional show route instruction.
@@ -82,7 +82,7 @@ php artisan vendor:publish --provider="Haythem\HereApiMapField\FieldServiceProvi
                         // Optional show route distance.
 
                         ->showTime()
-                        // Optional show route estmated time.
+                        // Optional show route estimated time.
 
                         ->routeParameter(),
                         // Optional setup route config default parameters as folow below:
