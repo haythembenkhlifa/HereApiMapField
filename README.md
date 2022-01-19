@@ -1,6 +1,6 @@
 # Here Api Map Field
 
-Here API map for Laravel Nova Field with the ability of real-time position update.
+Here API map for Laravel Nova Field with the ability of real-time marker position update.
 
 ### Installation
 
@@ -9,8 +9,6 @@ composer require haythem/here-api-map-field
 ### Publish config
 
 php artisan vendor:publish --provider="Haythem\HereApiMapField\FieldServiceProvider" --tag="config"
-
-Here you can set up your api key.
 
 ## Usage
 
@@ -58,7 +56,7 @@ Here you can set up your api key.
               return [
 
                         HereApiMapField::make('Route')
-                        ->apikey('<API_KEY>') // Optional If you specify the api key in theconfig file "here-api-map-field.php" you don't need to add it herebecause it will override it.
+                        ->apikey('<API_KEY>') // Optional If you specify the api key in theconfig file "here-api-map-field.php" you don't need to add it here because it will override it.https://developer.here.com/tutorials/getting-here-credentials/
 
                         ->addGpsPoints($points).// you can add markers in two ways you can pass an array of marker or/and chain it with addGpsPoint like the commented code below.
 
@@ -66,13 +64,13 @@ Here you can set up your api key.
                         //->addGpsPoint(5, 52.4818032, 13.5827823,'<svg></svg>',true)
 
 
-                        ->autoRefreshPoints(route('update-positions'),5000)
+                        ->autoRefreshPoints(route('update-positions'),5000)// Optional you can update markers location with refreshing the map.
 
                         ->addCircles($circles)
-                        // Optional You can draw a circles with this functio,you can add circles in two ways you can pass an array of circle or/and chain it with addCircle like the commented code below.
+                        // Optional you can add circles in two ways you can pass an array of circle or/and chain it with addCircle like the commented code below.
 
                         //->addCircle(52.5190146, 13.4979387, 10000)
-                        //->addCircle(52.5190146, 13.2979387, 5000)
+                        //->addCircle(52.5190146, 13.2979387, 5000,"rgba(255, 87, 34, 0.5)","rgba(0,0,0,1)",1)
 
                         ->setCenterAndZoom(52.4698452, 13.3827823, 12)
                         // Optional setinitial postion and zoom bydefault it will center at the first point with 14 zoom.
@@ -105,7 +103,7 @@ Here you can set up your api key.
 
 
 
-        // API ROUTE api.php No this only required if you want update the position frequently without refreshing the map page.
+        // api.php
 
         Route::get("update-positions", function () {
 
