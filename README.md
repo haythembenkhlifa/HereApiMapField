@@ -56,7 +56,7 @@ php artisan vendor:publish --provider="Haythem\HereApiMapField\FieldServiceProvi
               return [
 
                         HereApiMapField::make('Route')
-                        ->apikey('<API_KEY>') // Optional If you specify the api key in theconfig file "here-api-map-field.php" you don't need to add it here because it will override it.https://developer.here.com/tutorials/getting-here-credentials/
+                        ->apikey('<API_KEY>') // Optional If you specify the api key in the config file "here-api-map-field.php" you don't need to add it here because it will override it.https://developer.here.com/tutorials/getting-here-credentials/
 
                         ->addGpsPoints($points).// you can add markers in two ways you can pass an array of markers or/and chain it with addGpsPoint like the commented code below.
 

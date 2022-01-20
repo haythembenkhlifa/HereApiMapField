@@ -91,8 +91,8 @@ class HereApiMapField extends Field
      * Add the gps points.
      *
      * @param mixed $gpsPoints [
-     *                  json_encode([lat=>location_lat,lng=>location_lng,"svg"=>"svg marker if you want to update the default",show_marker=>false])
-     *                  json_encode([lat=>location_lat,lng=>location_lng])
+     *                  [lat=>location_lat,lng=>location_lng,"svg"=>"svg marker if you want to update the default",show_marker=>false]
+     *                  [lat=>location_lat,lng=>location_lng]
      *              ]
      * @param mixed $updateUrl Url to update the markers position this end point should return the same data structure of the gps points. 
      * @param int $time Frequence of updating the markers position in ms.
